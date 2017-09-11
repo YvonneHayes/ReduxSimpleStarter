@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import YTSearch from'youtube-api-search';
 import SearchBar from './components/search_bar';
+import VideoList from './components/video_list';
 
 const API_KEY = 'AIzaSyBdBeO-YfrzZftWXvHwtHnGRwqVdE3pX0w';
 
@@ -13,15 +14,17 @@ class App extends Component {
 
     this.state = {videos: []};
 
-    YTSearch({key:API_KEY, term: 'surfboards'}, (data) => {
-      this.setState({videos: data});
+    YTSearch({key:API_KEY, term: 'french bulldog'}, (videos) => {
+      this.setState({videos});
+      //this.setState({videos:videos}); ES6 shorthand above key and property have to be identical for this to work
     });
   }
-  
+
   render() {
     return (
       <div>
         <SearchBar />
+        <VideoList videos={this.state.videos} />
       </div>
     );
   }
